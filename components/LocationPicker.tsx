@@ -117,7 +117,8 @@ const LocationPicker: React.FC<
               ...(location && {
                 latitude: location.latitude,
                 longitude: location.longitude
-              })
+              }),
+              isEditable: true
             });
           }}
         />

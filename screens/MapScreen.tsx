@@ -7,6 +7,7 @@ import { NavigationStackScreenComponent } from "react-navigation-stack";
 const MapScreen: NavigationStackScreenComponent<{
   latitude?: number;
   longitude?: number;
+  isEditable?: boolean;
 }> = ({ navigation }) => {
   const [selected, setSelected] = useState<{
     latitude: number;
@@ -19,6 +20,15 @@ const MapScreen: NavigationStackScreenComponent<{
   }, [selected]);
   const lat = navigation.getParam("latitude");
   const lng = navigation.getParam("longitude");
+  const isEditable = navigation.getParam("isEditable");
+  const renderMarker = () => {
+    if (selected) {
+      return <Marker coordinate={selected} />;
+    }
+    if (lng && lat) {
+      return <Marker coordinate={{ latitude: lat, longitude: lng }} />;
+    }
+  };
   return (
     <MapView
       style={{ flex: 1 }}
@@ -28,9 +38,9 @@ const MapScreen: NavigationStackScreenComponent<{
         latitude: lat || 0.0236,
         longitude: lng || 37.9062
       }}
-      onPress={e => setSelected(e.nativeEvent.coordinate)}
+      onPress={e => isEditable && setSelected(e.nativeEvent.coordinate)}
     >
-      {selected && <Marker coordinate={selected} />}
+      {renderMarker()}
     </MapView>
   );
 };

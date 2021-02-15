@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Image } from "react-native-elements";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import MapView, { Marker } from "react-native-maps";
 import { NavigationStackScreenComponent } from "react-navigation-stack";
 import { useSelector } from "react-redux";
@@ -23,7 +23,11 @@ const PlaceDetailScreen: NavigationStackScreenComponent<{
     >
       <Image source={{ uri: image }} style={{ height: 200, width: "100%" }} />
       <View style={styles.map}>
-        <Text style={styles.title}>{address}</Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Map", { ...location })}
+        >
+          <Text style={styles.title}>{address}</Text>
+        </TouchableOpacity>
         <MapView
           region={{ latitudeDelta: 0.01, longitudeDelta: 0.01, ...location }}
           style={{ height: "100%", width: "100%" }}
