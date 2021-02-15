@@ -21,7 +21,14 @@ const INITIAL_STATE: PlacesState = {
 const placesReducer = (state = INITIAL_STATE, action: Action): PlacesState => {
   switch (action.type) {
     case "fetchPlaces":
-      return { ...state, places: action.payload };
+      const places = action.payload.map(pl => ({
+        location: { latitude: pl.lat, longitude: pl.lng },
+        title: pl.title,
+        id: pl.id.toString(),
+        image: pl.image,
+        address: pl.address
+      }));
+      return { ...state, places };
     case "addPlace":
       return { ...state, places: [...state.places, action.payload] };
     case "addImage":

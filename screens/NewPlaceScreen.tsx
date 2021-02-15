@@ -48,7 +48,6 @@ const NewPlaceScreen: NavigationStackScreenComponent = ({ navigation }) => {
               const imageArrName = image.split("/");
               const imageName = imageArrName[imageArrName.length - 1];
               const newPath = FileSystem.documentDirectory + imageName;
-
               try {
                 const { latitude, longitude } = location;
                 setLoading(true);

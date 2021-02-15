@@ -8,7 +8,7 @@ export interface Place {
   title: string;
   id: string;
   image: string;
-  address?: string;
+  address: string;
   location: {
     latitude: number;
     longitude: number;
