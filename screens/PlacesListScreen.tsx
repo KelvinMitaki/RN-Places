@@ -19,9 +19,18 @@ import PlaceItem from "../components/PlaceItem";
 import { fetchPlaces } from "../helpers/db";
 import Colors from "../constants/Colors";
 
+interface FetchedPlace {
+  address: string;
+  id: number;
+  image: string;
+  lat: number;
+  lng: number;
+  title: string;
+}
+
 export interface FetchPlaces {
   type: "fetchPlaces";
-  payload: Place[];
+  payload: FetchedPlace[];
 }
 
 const PlacesListScreen: NavigationStackScreenComponent = ({ navigation }) => {

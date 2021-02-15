@@ -15,17 +15,18 @@ const PlaceDetailScreen: NavigationStackScreenComponent<{
   const place = useSelector((state: Redux) =>
     state.places.places.find(pl => pl.id === navigation.getParam("placeId"))
   );
-  const { image, location, title, address } = place!;
+  const { image, location, address } = place!;
   return (
-    <ScrollView>
+    <ScrollView
+      style={{ height: "100%" }}
+      contentContainerStyle={{ height: "100%" }}
+    >
       <Image source={{ uri: image }} style={{ height: 200, width: "100%" }} />
       <View style={styles.map}>
-        <Text style={{ color: Colors.primary, textAlign: "center" }}>
-          {address}
-        </Text>
+        <Text style={styles.title}>{address}</Text>
         <MapView
           region={{ latitudeDelta: 0.01, longitudeDelta: 0.01, ...location }}
-          style={{ height: 200, width: "100%" }}
+          style={{ height: "100%", width: "100%" }}
         >
           <Marker coordinate={location} />
         </MapView>
@@ -43,6 +44,20 @@ const styles = StyleSheet.create({
   map: {
     marginHorizontal: 20,
     marginVertical: 20,
-    backgroundColor: "white"
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOpacity: 0.26,
+    shadowOffset: { height: 2, width: 0 },
+    shadowRadius: 8,
+    elevation: 10,
+    borderRadius: 5,
+    overflow: "hidden",
+    height: "65%"
+  },
+  title: {
+    color: Colors.primary,
+    textAlign: "center",
+    paddingVertical: 20,
+    fontSize: 20
   }
 });
