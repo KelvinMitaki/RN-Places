@@ -51,7 +51,8 @@ MapScreen.navigationOptions = ({ navigation }) => ({
       onPress={() => {
         const latitude = navigation.getParam("latitude");
         const longitude = navigation.getParam("longitude");
-        if (latitude && longitude) {
+        const isEditable = navigation.getParam("isEditable");
+        if (latitude && longitude && isEditable) {
           navigation.navigate("NewPlace", { latitude, longitude });
         }
       }}
